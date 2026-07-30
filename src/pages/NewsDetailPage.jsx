@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { formatDate, publicApi } from '../lib/api';
+import { splitArticleParagraphs } from '../lib/articleText';
 import { EmptyState } from '../components/ui';
 
 export default function NewsDetailPage() {
@@ -29,10 +30,7 @@ export default function NewsDetailPage() {
     return <EmptyState>Yükleniyor…</EmptyState>;
   }
 
-  const paragraphs = String(article.content || article.summary || '')
-    .split(/\n+/)
-    .map((p) => p.trim())
-    .filter(Boolean);
+  const paragraphs = splitArticleParagraphs(article.content || article.summary || '');
 
   return (
     <article className="mx-auto max-w-3xl">
