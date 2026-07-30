@@ -13,7 +13,7 @@ export default function NewsPage() {
     setError('');
     try {
       const qs = new URLSearchParams();
-      qs.set('limit', '36');
+      qs.set('limit', '500');
       if (String(keyword || '').trim()) qs.set('q', String(keyword).trim());
       const data = await publicApi(`/news?${qs.toString()}`);
       setNews(data.news || []);
