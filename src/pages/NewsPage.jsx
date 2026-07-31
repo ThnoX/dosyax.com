@@ -34,7 +34,7 @@ export default function NewsPage() {
       <SectionTitle
         eyebrow="Haberler"
         title="Teknoloji gündemi"
-        subtitle="Kaynağından alınan haberler. Detayda metin, görsel ve orijinal bağlantı birlikte görünür."
+        subtitle="Kaynağından alınan güncel teknoloji haberleri. Instagram’da paylaştıkların üstte görünür; akış günde yenilenir."
       />
 
       <div className="mb-8 flex flex-col gap-3 sm:flex-row">
