@@ -11,7 +11,7 @@ export default function HomePage() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    Promise.all([publicApi('/news?limit=3'), publicApi('/deals?limit=6')])
+    Promise.all([publicApi('/news?limit=8'), publicApi('/deals?limit=6')])
       .then(([n, d]) => {
         setNews(n.news || []);
         setDeals(d.deals || []);
@@ -113,7 +113,7 @@ export default function HomePage() {
         {!news.length ? (
           <EmptyState>Henüz yayınlanacak haber yok.</EmptyState>
         ) : (
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {news.map((item) => (
               <NewsCard key={item.id} item={item} />
             ))}
