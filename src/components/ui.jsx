@@ -35,10 +35,22 @@ export function NewsCard({ item }) {
             className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
             loading="lazy"
             referrerPolicy="no-referrer"
+            onError={(e) => {
+              const el = e.currentTarget;
+              el.style.display = 'none';
+              const fallback = el.parentElement?.querySelector('[data-news-fallback]');
+              if (fallback) fallback.classList.remove('hidden');
+            }}
           />
-        ) : (
-          <div className="grid h-full place-items-center text-sm text-ink-soft">Görsel yok</div>
-        )}
+        ) : null}
+        <div
+          data-news-fallback
+          className={`grid h-full place-items-center text-sm text-ink-soft ${
+            item.image_url ? 'hidden' : ''
+          }`}
+        >
+          Görsel yok
+        </div>
       </div>
       <div className="space-y-2 p-5">
         <p className="text-xs uppercase tracking-wide text-accent">{item.source_name}</p>
