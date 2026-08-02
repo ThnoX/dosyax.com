@@ -11,12 +11,25 @@ export default function HomePage() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    Promise.all([publicApi('/news?limit=8'), publicApi('/deals?limit=6')])
-      .then(([n, d]) => {
-        setNews(n.news || []);
-        setDeals(d.deals || []);
+    let cancelled = false;
+    // Ayrı ayrı yükle — biri yavaş/timeout olursa diğeri boşa düşmesin
+    publicApi('/news?limit=12', { timeoutMs: 10000 })
+      .then((n) => {
+        if (!cancelled) setNews(n.news || []);
       })
-      .catch((e) => setError(e.message));
+      .catch((e) => {
+        if (!cancelled) setError((prev) => prev || e.message);
+      });
+    publicApi('/deals?limit=6', { timeoutMs: 10000 })
+      .then((d) => {
+        if (!cancelled) setDeals(d.deals || []);
+      })
+      .catch((e) => {
+        if (!cancelled) setError((prev) => prev || e.message);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return (

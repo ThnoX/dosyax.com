@@ -3,15 +3,27 @@ const API_BASE = (import.meta.env.VITE_API_BASE || 'http://localhost:4000/api/v1
   ''
 );
 
-export async function publicApi(path) {
-  const res = await fetch(`${API_BASE}/public${path}`, {
-    headers: { Accept: 'application/json' },
-  });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) {
-    throw new Error(data.error || data.message || `İstek başarısız (${res.status})`);
+export async function publicApi(path, { timeoutMs = 12000 } = {}) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    const res = await fetch(`${API_BASE}/public${path}`, {
+      headers: { Accept: 'application/json' },
+      signal: ctrl.signal,
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.error || data.message || `İstek başarısız (${res.status})`);
+    }
+    return data;
+  } catch (err) {
+    if (err?.name === 'AbortError') {
+      throw new Error('Sunucu yanıt vermedi — sayfayı yenile');
+    }
+    throw err;
+  } finally {
+    clearTimeout(timer);
   }
-  return data;
 }
 
 export function formatTl(n) {

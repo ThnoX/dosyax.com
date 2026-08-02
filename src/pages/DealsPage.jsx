@@ -22,14 +22,19 @@ export default function DealsPage() {
     if (selectedStore) qs.set('store_id', selectedStore);
     if (selectedCategory) qs.set('category', selectedCategory);
     if (String(keyword || '').trim()) qs.set('q', String(keyword).trim());
-    const data = await publicApi(`/deals?${qs.toString()}`);
+    const data = await publicApi(`/deals?${qs.toString()}`, { timeoutMs: 12000 });
     setDeals(data.deals || []);
     if (data.categories?.length) setCategories(data.categories);
   }
 
   useEffect(() => {
     setBusy(true);
-    Promise.all([publicApi('/stores'), publicApi('/categories'), loadDeals({ selectedStore: '', selectedCategory: '', keyword: '' })])
+    setError('');
+    Promise.all([
+      publicApi('/stores', { timeoutMs: 8000 }).catch(() => ({ stores: [] })),
+      publicApi('/categories', { timeoutMs: 8000 }).catch(() => ({ categories: [] })),
+      loadDeals({ selectedStore: '', selectedCategory: '', keyword: '' }),
+    ])
       .then(([s, c]) => {
         setStores(s.stores || []);
         setCategories(c.categories || []);

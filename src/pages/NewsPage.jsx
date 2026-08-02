@@ -13,9 +13,9 @@ export default function NewsPage() {
     setError('');
     try {
       const qs = new URLSearchParams();
-      qs.set('limit', '500');
+      qs.set('limit', '80');
       if (String(keyword || '').trim()) qs.set('q', String(keyword).trim());
-      const data = await publicApi(`/news?${qs.toString()}`);
+      const data = await publicApi(`/news?${qs.toString()}`, { timeoutMs: 12000 });
       setNews(data.news || []);
     } catch (err) {
       setError(err.message);
