@@ -76,42 +76,43 @@ export function DealCard({ item }) {
       href={item.product_url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-line bg-panel/60 transition hover:border-accent/35"
+      className="group flex min-w-0 flex-col overflow-hidden rounded-xl border border-line bg-panel/60 transition hover:border-accent/35 sm:rounded-2xl"
     >
-      <div className="aspect-[4/3] bg-panel-2">
+      <div className="flex h-[7.25rem] items-center justify-center bg-panel-2 sm:h-[10.5rem] sm:aspect-auto md:h-[11.5rem]">
         {item.image_url ? (
           <img
             src={item.image_url}
             alt=""
-            className="h-full w-full object-contain p-3 sm:p-4"
+            className="max-h-full max-w-full object-contain p-2 sm:p-3"
             loading="lazy"
             referrerPolicy="no-referrer"
           />
         ) : (
-          <div className="grid h-full place-items-center text-sm text-ink-soft">Görsel yok</div>
+          <div className="grid h-full place-items-center text-xs text-ink-soft sm:text-sm">Görsel yok</div>
         )}
       </div>
-      <div className="flex min-w-0 flex-1 flex-col space-y-2 p-3.5 sm:p-4">
-        <p className="truncate text-xs text-accent">{item.store_label}</p>
-        <h3 className="line-clamp-2 text-sm font-medium leading-snug break-words text-ink group-hover:text-accent">
+      <div className="flex min-w-0 flex-1 flex-col gap-1 p-2.5 sm:gap-1.5 sm:p-3.5">
+        <p className="truncate text-[10px] text-accent sm:text-xs">{item.store_label}</p>
+        <h3 className="line-clamp-2 text-[12px] font-medium leading-snug break-words text-ink group-hover:text-accent sm:text-sm">
           {item.title}
         </h3>
-        <div className="mt-auto flex flex-wrap items-end gap-x-2 gap-y-1">
-          <span className="font-display text-xl text-ink sm:text-2xl">
-            {Number(item.price).toLocaleString('tr-TR')} TL
+        <div className="mt-auto flex flex-wrap items-end gap-x-1.5 gap-y-0.5 pt-1">
+          <span className="font-display text-[15px] leading-none text-ink sm:text-xl">
+            {Number(item.price).toLocaleString('tr-TR')}
+            <span className="ml-0.5 text-[10px] font-sans font-medium text-ink-soft sm:text-xs">TL</span>
           </span>
           {item.list_price > item.price ? (
-            <span className="text-sm text-ink-soft line-through">
+            <span className="text-[10px] text-ink-soft line-through sm:text-sm">
               {Number(item.list_price).toLocaleString('tr-TR')} TL
             </span>
           ) : null}
           {item.discount_pct ? (
-            <span className="rounded-md bg-accent/15 px-2 py-0.5 text-xs font-semibold text-accent">
+            <span className="rounded bg-accent/15 px-1.5 py-0.5 text-[10px] font-semibold text-accent sm:rounded-md sm:text-xs">
               %{item.discount_pct}
             </span>
           ) : null}
         </div>
-        <p className="text-xs font-medium text-accent-2">Satın alma sayfasına git →</p>
+        <p className="hidden text-xs font-medium text-accent-2 sm:block">Satın alma sayfasına git →</p>
       </div>
     </a>
   );
