@@ -17,12 +17,22 @@
   color-scheme: dark;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
+/*
+  Yatay kaymayı kökten kilitle.
+  iOS Safari overflow-x: clip’i zayıf uygular → hidden + touch-action: pan-y.
+*/
 html {
-  overflow-x: clip;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-x: none;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
@@ -36,27 +46,34 @@ body,
 
 body {
   margin: 0;
-  overflow-x: clip;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+  /* Dikey kaydır; yan pan’i engelle (sayfa sağa-sola kaymasın) */
+  touch-action: pan-y;
   font-family: var(--font-sans);
   color: var(--color-ink);
   background:
-    radial-gradient(1200px 600px at 12% -10%, rgba(212, 175, 99, 0.14), transparent 55%),
-    radial-gradient(900px 500px at 90% 0%, rgba(126, 184, 201, 0.12), transparent 50%),
+    radial-gradient(900px 480px at 12% -8%, rgba(212, 175, 99, 0.14), transparent 55%),
+    radial-gradient(700px 420px at 92% 0%, rgba(126, 184, 201, 0.12), transparent 50%),
     linear-gradient(180deg, #0b1017 0%, #080b10 45%, #0a0e14 100%);
-  background-attachment: fixed;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
 }
 
-/* iOS/Android: fixed bg kaydırırken titreşim / yatay kayma yapar */
-@media (max-width: 640px) {
-  body {
-    background-attachment: scroll;
-  }
+#root {
+  width: 100%;
+  overflow-x: hidden;
+  touch-action: pan-y;
 }
 
 img,
 video,
-svg {
+canvas {
   max-width: 100%;
+  height: auto;
 }
 
 a {
@@ -75,7 +92,10 @@ a {
 
 .dx-grain {
   position: relative;
-  overflow-x: clip;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  touch-action: pan-y;
 }
 
 .dx-grain::before {
@@ -83,23 +103,14 @@ a {
   pointer-events: none;
   position: absolute;
   inset: 0;
+  z-index: 0;
   opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Mobil yatay scroll şeritleri */
-.dx-scroll-x {
-  display: flex;
-  gap: 0.5rem;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  padding-bottom: 2px;
-}
-
-.dx-scroll-x::-webkit-scrollbar {
-  display: none;
+.dx-grain > * {
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes rise {

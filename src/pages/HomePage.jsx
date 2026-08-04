@@ -80,8 +80,8 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="anim-rise-delay relative hidden justify-self-end sm:block">
-            <div className="absolute -inset-6 rounded-full bg-[#4da3ff]/10 blur-2xl" />
+          <div className="anim-rise-delay relative hidden overflow-hidden justify-self-end sm:block">
+            <div className="absolute inset-0 rounded-full bg-[#4da3ff]/10 blur-2xl" />
             <img
               src="/dosyax-logo.png"
               alt=""

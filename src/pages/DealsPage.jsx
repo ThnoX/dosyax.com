@@ -81,7 +81,7 @@ export default function DealsPage() {
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-ink-soft">
               Mağazalar
             </p>
-            <div className="dx-scroll-x -mx-1 px-1 lg:mx-0 lg:flex lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0">
+            <div className="flex flex-wrap gap-2 lg:flex-col lg:gap-1">
               {storeButtons.map((s) => {
                 const active = storeId === s.id;
                 return (
@@ -89,7 +89,7 @@ export default function DealsPage() {
                     key={s.id || 'all'}
                     type="button"
                     onClick={() => applyFilters({ storeId: s.id })}
-                    className={`shrink-0 rounded-xl px-3 py-2 text-left text-sm transition lg:w-full ${
+                    className={`rounded-xl px-3 py-2 text-left text-sm transition lg:w-full ${
                       active
                         ? 'bg-accent/15 font-semibold text-accent'
                         : 'bg-white/[0.03] text-ink-soft hover:bg-white/5 hover:text-ink lg:bg-transparent'

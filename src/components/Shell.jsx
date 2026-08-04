@@ -10,9 +10,9 @@ const links = [
 
 export default function Shell() {
   return (
-    <div className="dx-grain min-h-screen pb-[env(safe-area-inset-bottom)]">
-      <header className="sticky top-0 z-40 border-b border-line/70 bg-[#0b1017]/90 backdrop-blur-md supports-[backdrop-filter]:bg-[#0b1017]/75">
-        <div className="mx-auto max-w-6xl px-3 pt-[max(0.65rem,env(safe-area-inset-top))] sm:px-6">
+    <div className="dx-grain min-h-screen w-full max-w-full overflow-x-hidden pb-[env(safe-area-inset-bottom)]">
+      <header className="sticky top-0 z-40 w-full overflow-x-hidden border-b border-line/70 bg-[#0b1017]/90 backdrop-blur-md supports-[backdrop-filter]:bg-[#0b1017]/75">
+        <div className="mx-auto w-full max-w-6xl px-3 pt-[max(0.65rem,env(safe-area-inset-top))] sm:px-6">
           {/* Üst sıra: marka + IG */}
           <div className="flex items-center justify-between gap-3 py-2.5 sm:py-3">
             <Link to="/" className="group flex min-w-0 items-center gap-2.5 sm:gap-3">
@@ -90,12 +90,12 @@ export default function Shell() {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-6xl px-3 py-6 sm:px-6 sm:py-10">
+      <main className="mx-auto w-full max-w-6xl overflow-x-hidden px-3 py-6 sm:px-6 sm:py-10">
         <Outlet />
       </main>
 
-      <footer className="border-t border-line/60">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-3 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      <footer className="w-full overflow-x-hidden border-t border-line/60">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-3 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <div className="flex min-w-0 items-start gap-3 sm:items-center">
             <img
               src="/dosyax-logo.png"
