@@ -23,35 +23,20 @@
   box-sizing: border-box;
 }
 
-/*
-  Yatay kaymayı kökten kilitle.
-  iOS Safari overflow-x: clip’i zayıf uygular → hidden + touch-action: pan-y.
-*/
-html {
+html,
+body {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior-x: none;
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* kaydırma sadece .dx-scrollport’ta */
+  overscroll-behavior: none;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-}
-
-html,
-body,
-#root {
-  min-height: 100%;
-  max-width: 100%;
+  touch-action: pan-y;
 }
 
 body {
-  margin: 0;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  overscroll-behavior-x: none;
-  /* Dikey kaydır; yan pan’i engelle (sayfa sağa-sola kaymasın) */
-  touch-action: pan-y;
   font-family: var(--font-sans);
   color: var(--color-ink);
   background:
@@ -60,20 +45,33 @@ body {
     linear-gradient(180deg, #0b1017 0%, #080b10 45%, #0a0e14 100%);
   background-attachment: scroll;
   background-repeat: no-repeat;
-  background-size: 100% auto;
+  background-size: cover;
 }
 
 #root {
   width: 100%;
+  max-width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Tek dikey kaydırma kabı — sağa/sola pan engelli */
+.dx-scrollport {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
   overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: contain;
   touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 }
 
 img,
 video,
 canvas {
   max-width: 100%;
-  height: auto;
 }
 
 a {
@@ -94,8 +92,8 @@ a {
   position: relative;
   width: 100%;
   max-width: 100%;
+  min-width: 0;
   overflow-x: hidden;
-  touch-action: pan-y;
 }
 
 .dx-grain::before {
@@ -111,6 +109,24 @@ a {
 .dx-grain > * {
   position: relative;
   z-index: 1;
+  min-width: 0;
+}
+
+/* Kart ızgarası: her kolon max genişliği aşıp taşmasın */
+.dx-card-grid {
+  display: grid;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.625rem;
+}
+
+@media (min-width: 1024px) {
+  .dx-card-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
 }
 
 @keyframes rise {

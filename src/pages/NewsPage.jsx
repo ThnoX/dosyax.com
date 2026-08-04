@@ -30,7 +30,7 @@ export default function NewsPage() {
   }, []);
 
   return (
-    <div>
+    <div className="min-w-0">
       <SectionTitle
         eyebrow="Haberler"
         title="Teknoloji gündemi"
@@ -60,7 +60,7 @@ export default function NewsPage() {
       {!news.length ? (
         <EmptyState>Haber bulunamadı.</EmptyState>
       ) : (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+        <div className="dx-card-grid">
           {news.map((item) => (
             <NewsCard key={item.id} item={item} />
           ))}

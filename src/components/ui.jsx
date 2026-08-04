@@ -3,7 +3,7 @@ import { formatDate } from '../lib/api';
 
 export function SectionTitle({ eyebrow, title, subtitle }) {
   return (
-    <div className="mb-6 max-w-2xl sm:mb-8">
+    <div className="mb-6 max-w-2xl min-w-0 sm:mb-8">
       {eyebrow ? (
         <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-accent">{eyebrow}</p>
       ) : null}
@@ -19,7 +19,7 @@ export function SectionTitle({ eyebrow, title, subtitle }) {
 
 export function EmptyState({ children }) {
   return (
-    <div className="rounded-2xl border border-dashed border-line bg-panel/40 px-6 py-16 text-center text-ink-soft">
+    <div className="rounded-2xl border border-dashed border-line bg-panel/40 px-4 py-12 text-center text-ink-soft sm:px-6 sm:py-16">
       {children}
     </div>
   );
@@ -29,7 +29,7 @@ export function NewsCard({ item }) {
   return (
     <Link
       to={`/haberler/${item.id}`}
-      className="group grid min-w-0 overflow-hidden rounded-2xl border border-line bg-panel/60 transition hover:border-accent/35 hover:bg-panel"
+      className="group grid min-w-0 overflow-hidden rounded-xl border border-line bg-panel/60 transition hover:border-accent/35 hover:bg-panel sm:rounded-2xl"
     >
       <div className="aspect-[16/10] overflow-hidden bg-panel-2">
         {item.image_url ? (
@@ -49,22 +49,26 @@ export function NewsCard({ item }) {
         ) : null}
         <div
           data-news-fallback
-          className={`grid h-full place-items-center text-sm text-ink-soft ${
+          className={`grid h-full place-items-center text-xs text-ink-soft sm:text-sm ${
             item.image_url ? 'hidden' : ''
           }`}
         >
           Görsel yok
         </div>
       </div>
-      <div className="min-w-0 space-y-2 p-4 sm:p-5">
-        <p className="truncate text-xs uppercase tracking-wide text-accent">{item.source_name}</p>
-        <h3 className="font-display text-lg leading-snug break-words text-ink group-hover:text-accent sm:text-xl">
+      <div className="min-w-0 space-y-1 p-2.5 sm:space-y-2 sm:p-5">
+        <p className="truncate text-[10px] uppercase tracking-wide text-accent sm:text-xs">
+          {item.source_name}
+        </p>
+        <h3 className="font-display text-[13px] leading-snug break-words text-ink group-hover:text-accent sm:text-xl">
           {item.title}
         </h3>
         {item.summary ? (
-          <p className="line-clamp-2 text-sm leading-relaxed text-ink-soft">{item.summary}</p>
+          <p className="line-clamp-2 hidden text-sm leading-relaxed text-ink-soft sm:block">
+            {item.summary}
+          </p>
         ) : null}
-        <p className="text-xs text-ink-soft">{formatDate(item.published_at)}</p>
+        <p className="text-[10px] text-ink-soft sm:text-xs">{formatDate(item.published_at)}</p>
       </div>
     </Link>
   );
@@ -78,7 +82,7 @@ export function DealCard({ item }) {
       rel="noopener noreferrer"
       className="group flex min-w-0 flex-col overflow-hidden rounded-xl border border-line bg-panel/60 transition hover:border-accent/35 sm:rounded-2xl"
     >
-      <div className="flex h-[7.25rem] items-center justify-center bg-panel-2 sm:h-[10.5rem] sm:aspect-auto md:h-[11.5rem]">
+      <div className="flex h-[7.25rem] items-center justify-center bg-panel-2 sm:h-[11rem]">
         {item.image_url ? (
           <img
             src={item.image_url}
@@ -99,7 +103,9 @@ export function DealCard({ item }) {
         <div className="mt-auto flex flex-wrap items-end gap-x-1.5 gap-y-0.5 pt-1">
           <span className="font-display text-[15px] leading-none text-ink sm:text-xl">
             {Number(item.price).toLocaleString('tr-TR')}
-            <span className="ml-0.5 text-[10px] font-sans font-medium text-ink-soft sm:text-xs">TL</span>
+            <span className="ml-0.5 text-[10px] font-sans font-medium text-ink-soft sm:text-xs">
+              TL
+            </span>
           </span>
           {item.list_price > item.price ? (
             <span className="text-[10px] text-ink-soft line-through sm:text-sm">

@@ -68,7 +68,7 @@ export default function DealsPage() {
   );
 
   return (
-    <div>
+    <div className="min-w-0">
       <SectionTitle
         eyebrow="Fırsatlar"
         title="Güncel indirimler"
@@ -147,7 +147,7 @@ export default function DealsPage() {
               {busy ? 'Yükleniyor…' : 'Bu filtrede indirim yok. Mağaza veya kategoriyi değiştir.'}
             </EmptyState>
           ) : (
-            <div className="grid grid-cols-2 gap-2.5 sm:gap-4 xl:grid-cols-3">
+            <div className="dx-card-grid">
               {deals.map((item) => (
                 <DealCard key={item.id} item={item} />
               ))}

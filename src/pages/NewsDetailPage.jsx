@@ -33,7 +33,7 @@ export default function NewsDetailPage() {
   const paragraphs = splitArticleParagraphs(article.content || article.summary || '');
 
   return (
-    <article className="mx-auto max-w-3xl">
+    <article className="mx-auto w-full max-w-3xl min-w-0">
       <Link to="/haberler" className="mb-6 inline-block text-sm text-ink-soft hover:text-accent">
         ← Haberlere dön
       </Link>

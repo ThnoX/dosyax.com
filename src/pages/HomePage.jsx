@@ -33,7 +33,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div>
+    <div className="min-w-0">
       <section className="relative mb-10 overflow-hidden rounded-2xl border border-line bg-panel/60 sm:mb-12 sm:rounded-[1.75rem]">
         <div
           className="pointer-events-none absolute inset-0"
@@ -128,7 +128,7 @@ export default function HomePage() {
         {!news.length ? (
           <EmptyState>Henüz yayınlanacak haber yok.</EmptyState>
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+          <div className="dx-card-grid">
             {news.map((item) => (
               <NewsCard key={item.id} item={item} />
             ))}
@@ -146,7 +146,7 @@ export default function HomePage() {
         {!deals.length ? (
           <EmptyState>Henüz paylaşılan indirim yok.</EmptyState>
         ) : (
-          <div className="grid grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-3">
+          <div className="dx-card-grid">
             {deals.map((item) => (
               <DealCard key={item.id} item={item} />
             ))}
