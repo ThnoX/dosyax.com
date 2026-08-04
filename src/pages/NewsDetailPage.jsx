@@ -41,11 +41,13 @@ export default function NewsDetailPage() {
       <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-accent">
         {article.source_name}
       </p>
-      <h1 className="font-display text-4xl leading-tight text-ink sm:text-5xl">{article.title}</h1>
+      <h1 className="font-display text-3xl leading-tight break-words text-ink sm:text-4xl md:text-5xl">
+        {article.title}
+      </h1>
       <p className="mt-3 text-sm text-ink-soft">{formatDate(article.published_at)}</p>
 
       {article.image_url ? (
-        <div className="mt-8 overflow-hidden rounded-2xl border border-line bg-panel-2">
+        <div className="mt-6 overflow-hidden rounded-2xl border border-line bg-panel-2 sm:mt-8">
           <img
             src={article.image_url}
             alt=""
@@ -55,7 +57,7 @@ export default function NewsDetailPage() {
         </div>
       ) : null}
 
-      <div className="mt-8 space-y-4 text-base leading-relaxed text-ink/90">
+      <div className="mt-6 space-y-4 text-[15px] leading-relaxed break-words text-ink/90 sm:mt-8 sm:text-base">
         {paragraphs.length ? (
           paragraphs.map((p, i) => <p key={`${i}-${p.slice(0, 24)}`}>{p}</p>)
         ) : (
@@ -63,15 +65,15 @@ export default function NewsDetailPage() {
         )}
       </div>
 
-      <div className="mt-10 rounded-2xl border border-line bg-panel/70 p-5">
+      <div className="mt-8 rounded-2xl border border-line bg-panel/70 p-4 sm:mt-10 sm:p-5">
         <p className="text-xs uppercase tracking-wide text-ink-soft">Kaynak</p>
-        <p className="mt-1 font-medium text-ink">{article.source_name}</p>
+        <p className="mt-1 font-medium break-words text-ink">{article.source_name}</p>
         {article.source_url ? (
           <a
             href={article.source_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 inline-flex text-sm font-semibold text-accent hover:underline"
+            className="mt-3 inline-flex break-all text-sm font-semibold text-accent hover:underline"
           >
             Orijinal haberi oku →
           </a>

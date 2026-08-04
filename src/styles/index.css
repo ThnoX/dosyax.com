@@ -21,14 +21,22 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 html,
 body,
 #root {
   min-height: 100%;
+  max-width: 100%;
 }
 
 body {
   margin: 0;
+  overflow-x: clip;
   font-family: var(--font-sans);
   color: var(--color-ink);
   background:
@@ -36,6 +44,19 @@ body {
     radial-gradient(900px 500px at 90% 0%, rgba(126, 184, 201, 0.12), transparent 50%),
     linear-gradient(180deg, #0b1017 0%, #080b10 45%, #0a0e14 100%);
   background-attachment: fixed;
+}
+
+/* iOS/Android: fixed bg kaydırırken titreşim / yatay kayma yapar */
+@media (max-width: 640px) {
+  body {
+    background-attachment: scroll;
+  }
+}
+
+img,
+video,
+svg {
+  max-width: 100%;
 }
 
 a {
@@ -54,6 +75,7 @@ a {
 
 .dx-grain {
   position: relative;
+  overflow-x: clip;
 }
 
 .dx-grain::before {
@@ -65,6 +87,21 @@ a {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* Mobil yatay scroll şeritleri */
+.dx-scroll-x {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+
+.dx-scroll-x::-webkit-scrollbar {
+  display: none;
+}
+
 @keyframes rise {
   from {
     opacity: 0;
@@ -73,6 +110,14 @@ a {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-rise,
+  .anim-rise-delay,
+  .anim-rise-delay-2 {
+    animation: none;
   }
 }
 

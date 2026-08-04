@@ -34,7 +34,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <section className="relative mb-12 overflow-hidden rounded-[1.75rem] border border-line bg-panel/60">
+      <section className="relative mb-10 overflow-hidden rounded-2xl border border-line bg-panel/60 sm:mb-12 sm:rounded-[1.75rem]">
         <div
           className="pointer-events-none absolute inset-0"
           style={{
@@ -42,29 +42,29 @@ export default function HomePage() {
               'radial-gradient(ellipse 70% 80% at 88% 20%, rgba(77,163,255,0.18), transparent 55%), radial-gradient(ellipse 50% 60% at 10% 90%, rgba(212,175,99,0.12), transparent 50%)',
           }}
         />
-        <div className="relative grid items-center gap-8 px-6 py-8 sm:grid-cols-[1.15fr_0.85fr] sm:px-10 sm:py-10 lg:px-12 lg:py-12">
-          <div className="space-y-5">
+        <div className="relative grid items-center gap-6 px-4 py-7 sm:grid-cols-[1.15fr_0.85fr] sm:gap-8 sm:px-10 sm:py-10 lg:px-12 lg:py-12">
+          <div className="min-w-0 space-y-4 sm:space-y-5">
             <img
               src="/dosyax-logo.png"
               alt="DosyaX"
-              className="anim-rise h-16 w-16 rounded-full object-cover ring-1 ring-white/20 sm:h-20 sm:w-20"
+              className="anim-rise h-14 w-14 rounded-full object-cover ring-1 ring-white/20 sm:h-20 sm:w-20"
             />
-            <h1 className="anim-rise-delay max-w-xl font-display text-4xl leading-[1.02] text-ink sm:text-5xl lg:text-[3.4rem]">
+            <h1 className="anim-rise-delay max-w-xl font-display text-[1.85rem] leading-[1.08] break-words text-ink sm:text-5xl sm:leading-[1.02] lg:text-[3.4rem]">
               Teknoloji haberleri ve seçilmiş indirimler.
             </h1>
-            <p className="anim-rise-delay-2 max-w-lg text-base leading-relaxed text-ink-soft">
+            <p className="anim-rise-delay-2 max-w-lg text-sm leading-relaxed text-ink-soft sm:text-base">
               Kaynağa sadık haberler. Hikayede paylaştığımız güncel fırsatlar. Sade, hızlı, net.
             </p>
-            <div className="anim-rise-delay-2 flex flex-wrap gap-3 pt-1">
+            <div className="anim-rise-delay-2 flex flex-col gap-2.5 pt-1 sm:flex-row sm:flex-wrap sm:gap-3">
               <Link
                 to="/haberler"
-                className="rounded-full bg-accent px-5 py-3 text-sm font-semibold text-[#1a1408] transition hover:brightness-110"
+                className="rounded-full bg-accent px-5 py-3 text-center text-sm font-semibold text-[#1a1408] transition hover:brightness-110"
               >
                 Haberlere bak
               </Link>
               <Link
                 to="/indirimler"
-                className="rounded-full border border-line bg-white/5 px-5 py-3 text-sm font-semibold text-ink transition hover:bg-white/10"
+                className="rounded-full border border-line bg-white/5 px-5 py-3 text-center text-sm font-semibold text-ink transition hover:bg-white/10"
               >
                 Güncel indirimler
               </Link>
@@ -72,9 +72,9 @@ export default function HomePage() {
                 href={IG_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-[#4da3ff]/40 bg-[#4da3ff]/12 px-5 py-3 text-sm font-semibold text-[#b7dcff] transition hover:bg-[#4da3ff]/20"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-[#4da3ff]/40 bg-[#4da3ff]/12 px-5 py-3 text-sm font-semibold text-[#b7dcff] transition hover:bg-[#4da3ff]/20"
               >
-                <IgIcon className="h-4 w-4" />
+                <IgIcon className="h-4 w-4 shrink-0" />
                 Instagram’da takip et
               </a>
             </div>
@@ -91,13 +91,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mb-12 overflow-hidden rounded-2xl border border-[#4da3ff]/25 bg-gradient-to-r from-[#4da3ff]/10 via-panel/40 to-transparent px-5 py-5 sm:px-6">
+      <section className="mb-10 overflow-hidden rounded-2xl border border-[#4da3ff]/25 bg-gradient-to-r from-[#4da3ff]/10 via-panel/40 to-transparent px-4 py-4 sm:mb-12 sm:px-6 sm:py-5">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
+          <div className="min-w-0">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#7eb8ff]">
               Instagram
             </p>
-            <p className="mt-1 font-display text-xl text-ink">Güncel haber ve indirimler @dosyax.tr</p>
+            <p className="mt-1 font-display text-lg break-words text-ink sm:text-xl">
+              Güncel haber ve indirimler @dosyax.tr
+            </p>
             <p className="mt-1 text-sm text-ink-soft">
               Hikaye ve post’ları kaçırmamak için hesabı takip et.
             </p>
@@ -106,7 +108,7 @@ export default function HomePage() {
             href={IG_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#4da3ff] px-5 py-3 text-sm font-semibold text-[#071018] transition hover:brightness-110"
+            className="inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-full bg-[#4da3ff] px-5 py-3 text-sm font-semibold text-[#071018] transition hover:brightness-110 sm:w-auto"
           >
             <IgIcon className="h-4 w-4" />
             Takip et
@@ -116,17 +118,17 @@ export default function HomePage() {
 
       {error ? <p className="mb-6 text-sm text-danger">{error}</p> : null}
 
-      <section className="mb-14">
-        <div className="mb-6 flex items-end justify-between gap-4">
-          <h2 className="font-display text-3xl text-ink">Son haberler</h2>
-          <Link to="/haberler" className="text-sm text-accent hover:underline">
+      <section className="mb-12 sm:mb-14">
+        <div className="mb-5 flex items-end justify-between gap-3 sm:mb-6 sm:gap-4">
+          <h2 className="min-w-0 font-display text-2xl text-ink sm:text-3xl">Son haberler</h2>
+          <Link to="/haberler" className="shrink-0 text-sm text-accent hover:underline">
             Tümü →
           </Link>
         </div>
         {!news.length ? (
           <EmptyState>Henüz yayınlanacak haber yok.</EmptyState>
         ) : (
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
             {news.map((item) => (
               <NewsCard key={item.id} item={item} />
             ))}
@@ -135,16 +137,16 @@ export default function HomePage() {
       </section>
 
       <section>
-        <div className="mb-6 flex items-end justify-between gap-4">
-          <h2 className="font-display text-3xl text-ink">Güncel indirimler</h2>
-          <Link to="/indirimler" className="text-sm text-accent hover:underline">
+        <div className="mb-5 flex items-end justify-between gap-3 sm:mb-6 sm:gap-4">
+          <h2 className="min-w-0 font-display text-2xl text-ink sm:text-3xl">Güncel indirimler</h2>
+          <Link to="/indirimler" className="shrink-0 text-sm text-accent hover:underline">
             Tümü →
           </Link>
         </div>
         {!deals.length ? (
           <EmptyState>Henüz paylaşılan indirim yok.</EmptyState>
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {deals.map((item) => (
               <DealCard key={item.id} item={item} />
             ))}

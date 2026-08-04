@@ -75,13 +75,13 @@ export default function DealsPage() {
         subtitle="Instagram hikayelerinde paylaştığımız ürünler. Tıklayınca orijinal mağaza sayfasına gidersin."
       />
 
-      <div className="grid gap-8 lg:grid-cols-[220px_1fr]">
-        <aside className="space-y-6">
+      <div className="grid gap-6 lg:grid-cols-[220px_1fr] lg:gap-8">
+        <aside className="min-w-0 space-y-5 sm:space-y-6">
           <div>
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-ink-soft">
               Mağazalar
             </p>
-            <div className="flex flex-wrap gap-2 lg:flex-col lg:gap-1">
+            <div className="dx-scroll-x -mx-1 px-1 lg:mx-0 lg:flex lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0">
               {storeButtons.map((s) => {
                 const active = storeId === s.id;
                 return (
@@ -89,10 +89,10 @@ export default function DealsPage() {
                     key={s.id || 'all'}
                     type="button"
                     onClick={() => applyFilters({ storeId: s.id })}
-                    className={`rounded-xl px-3 py-2 text-left text-sm transition ${
+                    className={`shrink-0 rounded-xl px-3 py-2 text-left text-sm transition lg:w-full ${
                       active
                         ? 'bg-accent/15 font-semibold text-accent'
-                        : 'text-ink-soft hover:bg-white/5 hover:text-ink'
+                        : 'bg-white/[0.03] text-ink-soft hover:bg-white/5 hover:text-ink lg:bg-transparent'
                     }`}
                   >
                     {s.label}
@@ -107,7 +107,7 @@ export default function DealsPage() {
               Kategori
             </p>
             <select
-              className="w-full rounded-xl border border-line bg-panel px-3 py-2.5 text-sm"
+              className="w-full max-w-full rounded-xl border border-line bg-panel px-3 py-2.5 text-sm"
               value={category}
               onChange={(e) => applyFilters({ category: e.target.value })}
             >
@@ -121,7 +121,7 @@ export default function DealsPage() {
           </div>
         </aside>
 
-        <div>
+        <div className="min-w-0">
           <div className="mb-5 flex flex-col gap-3 sm:flex-row">
             <input
               className="min-w-0 flex-1 rounded-xl border border-line bg-panel px-4 py-3 text-sm outline-none ring-accent/40 placeholder:text-ink-soft focus:ring-2"
@@ -147,7 +147,7 @@ export default function DealsPage() {
               {busy ? 'Yükleniyor…' : 'Bu filtrede indirim yok. Mağaza veya kategoriyi değiştir.'}
             </EmptyState>
           ) : (
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {deals.map((item) => (
                 <DealCard key={item.id} item={item} />
               ))}
