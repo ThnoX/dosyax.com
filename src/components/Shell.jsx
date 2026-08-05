@@ -1,4 +1,6 @@
-import { NavLink, Outlet, Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { NavLink, Outlet, Link, useLocation } from 'react-router-dom';
+import { trackSiteEvent } from '../lib/track';
 
 const IG_URL = 'https://www.instagram.com/dosyax.tr/';
 
@@ -9,6 +11,14 @@ const links = [
 ];
 
 export default function Shell() {
+  const location = useLocation();
+  useEffect(() => {
+    trackSiteEvent('page_view', {
+      path: location.pathname + (location.search || ''),
+      meta: { page: location.pathname },
+    });
+  }, [location.pathname, location.search]);
+
   return (
     <div className="dx-scrollport">
       <div className="dx-grain min-h-full w-full max-w-full pb-[env(safe-area-inset-bottom)]">

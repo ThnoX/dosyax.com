@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { formatDate } from '../lib/api';
+import { trackSiteEvent } from '../lib/track';
 
 export function SectionTitle({ eyebrow, title, subtitle }) {
   return (
@@ -29,6 +30,13 @@ export function NewsCard({ item }) {
   return (
     <Link
       to={`/haberler/${item.id}`}
+      onClick={() =>
+        trackSiteEvent('news_click', {
+          entity_id: item.id,
+          entity_title: item.title,
+          meta: { source: item.source_name },
+        })
+      }
       className="group grid min-w-0 overflow-hidden rounded-xl border border-line bg-panel/60 transition hover:border-accent/35 hover:bg-panel sm:rounded-2xl"
     >
       <div className="aspect-[16/10] overflow-hidden bg-panel-2">
@@ -80,6 +88,18 @@ export function DealCard({ item }) {
       href={item.product_url}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() =>
+        trackSiteEvent('deal_click', {
+          entity_id: item.id,
+          entity_title: item.title,
+          target_url: item.product_url,
+          meta: {
+            store: item.store_label || item.store_id,
+            price: item.price,
+            discount_pct: item.discount_pct,
+          },
+        })
+      }
       className="group flex min-w-0 flex-col overflow-hidden rounded-xl border border-line bg-panel/60 transition hover:border-accent/35 sm:rounded-2xl"
     >
       <div className="flex h-[7.25rem] items-center justify-center bg-panel-2 sm:h-[11rem]">
